@@ -1,2 +1,2 @@
 # virarswimming
-This  contains the pages for www.virarwimming.in
+This contains the pages for www.virarswimming.in
