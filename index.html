@@ -1,14 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="mr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shakeel Contractor Inter Pool Swimming Competition</title>
+  <title>लेन पकड आणि Race Finish कर</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@900&family=Montserrat:wght@400;700;900&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@900&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -16,293 +17,54 @@
 
     body {
       min-height: 100vh;
-      display: flex;
       align-items: center;
       justify-content: center;
       background-image: url('phoolpada_swimming_pool.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
     }
 
     .overlay {
       position: fixed;
       inset: 0;
-      background: linear-gradient(
-        160deg,
-        rgba(0, 10, 40, 0.39) 0%,
-        rgba(0, 50, 100, 0.33) 50%,
-        rgba(0, 20, 60, 0.40) 100%
-      );
+      background: rgba(0, 30, 60, 0.55);
     }
 
-    /* Animated water ripple rings */
-    .ripple-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      border: 1.5px solid rgba(0, 200, 255, 0.18);
-      animation: ripple-expand 7s ease-out infinite;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    .ripple:nth-child(1) { animation-delay: 0s;   width: 200px; height: 200px; }
-    .ripple:nth-child(2) { animation-delay: 1.5s; width: 200px; height: 200px; }
-    .ripple:nth-child(3) { animation-delay: 3s;   width: 200px; height: 200px; }
-    .ripple:nth-child(4) { animation-delay: 4.5s; width: 200px; height: 200px; }
-
-    @keyframes ripple-expand {
-      0%   { transform: translate(-50%, -50%) scale(0);  opacity: 0.7; }
-      100% { transform: translate(-50%, -50%) scale(9);  opacity: 0;   }
-    }
-
-    /* Card */
     .hero {
       position: relative;
       z-index: 1;
       text-align: center;
-      padding: 3rem 3.5rem 2.8rem;
-      border-radius: 20px;
-      max-width: 860px;
-      width: 92%;
-      border: 1px solid rgba(0, 200, 255, 0.22);
-      animation: card-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+      padding: 2rem 3rem;
+      border-radius: 12px;
     }
 
-    @keyframes card-in {
-      from { opacity: 0; transform: translateY(36px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0)    scale(1);    }
-    }
-
-    /* Top accent bar */
-    .hero::before {
-      content: '';
-      display: block;
-      height: 4px;
-      border-radius: 4px 4px 0 0;
-      background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
-      background-size: 200% 100%;
-      animation: shimmer 3s linear infinite;
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      border-radius: 20px 20px 0 0;
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    /* Event label pill */
-    .event-label {
-      display: inline-block;
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #ffffff;
-      background: rgba(0, 200, 255, 0.12);
-      border: 1px solid rgba(0, 200, 255, 0.35);
-      padding: 0.28rem 1rem;
-      border-radius: 50px;
-      margin-bottom: 1.4rem;
-      animation: fade-in 1.2s 0.3s both;
-    }
-
-    /* Main competition title – arc wrapper */
-    .semicircle-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 0.2rem;
-      animation: fade-in 1.1s 0.4s both;
-    }
-
-    .arc-svg {
-      width: 100%;
-      max-width: 580px;
-      filter: drop-shadow(0 0 18px rgba(0, 200, 255, 0.45));
-      overflow: visible;
-    }
-
-    .competition-subtitle {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.1rem, 3vw, 1.9rem);
-      font-weight: 900;
-      color: #ffffff;
-      letter-spacing: 0.03em;
-      margin-top: 0.35rem;
-    }
-
-    /* Divider */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      justify-content: center;
-      margin: 1.1rem auto;
-      max-width: 340px;
-      animation: fade-in 1s 0.6s both;
-    }
-    .divider-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.55), transparent);
-    }
-    .divider-icon {
-      font-size: 1.1rem;
-    }
-
-    /* Date badge */
-    .date-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Raleway', sans-serif;
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.06em;
-      background: rgba(255, 215, 0, 0.1);
-      border: 1px solid rgba(255, 215, 0, 0.3);
-      padding: 0.45rem 1.4rem;
-      border-radius: 50px;
-      margin-bottom: 2rem;
-      animation: fade-in 1s 0.7s both;
-    }
-    .date-badge .icon {
-      font-size: 1rem;
-    }
-
-    /* Tagline in Marathi / Hindi */
-    .marathi-tagline {
+    h1 {
       font-family: 'Noto Sans Devanagari', 'Segoe UI', Arial, sans-serif;
-      font-size: clamp(1.6rem, 5vw, 3.4rem);
+      font-size: clamp(2rem, 6vw, 4.5rem);
       font-weight: 900;
       color: #ffffff;
       text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.7),
-        0 0 40px rgba(0, 180, 255, 0.55);
+        0 2px 8px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(0, 180, 255, 0.6);
+      letter-spacing: 0.02em;
       line-height: 1.3;
-      margin-bottom: 0.6rem;
-      animation: fade-in 1s 0.9s both;
     }
 
-    /* Sub-brand */
-    .sub-brand {
-      font-family: 'Raleway', sans-serif;
-      font-size: clamp(0.85rem, 2vw, 1.05rem);
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+
+    h3 {
+      font-family: 'Noto Sans Devanagari', 'Segoe UI', Arial, sans-serif;
       color: #ffffff;
-      margin-top: 0.2rem;
-      animation: fade-in 1s 1.1s both;
-    }
-
-    /* Wave decoration at bottom of card */
-    .wave-bar {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      animation: fade-in 1s 1.2s both;
-    }
-    .wave-bar span {
-      display: inline-block;
-      width: 6px;
-      border-radius: 3px;
-      background: linear-gradient(180deg, #00c6ff, #0072ff);
-      animation: wave-bounce 1.2s ease-in-out infinite;
-    }
-    .wave-bar span:nth-child(1) { height: 12px; animation-delay: 0s;    }
-    .wave-bar span:nth-child(2) { height: 22px; animation-delay: 0.1s;  }
-    .wave-bar span:nth-child(3) { height: 32px; animation-delay: 0.2s;  }
-    .wave-bar span:nth-child(4) { height: 22px; animation-delay: 0.3s;  }
-    .wave-bar span:nth-child(5) { height: 12px; animation-delay: 0.4s;  }
-    .wave-bar span:nth-child(6) { height: 22px; animation-delay: 0.5s;  }
-    .wave-bar span:nth-child(7) { height: 32px; animation-delay: 0.6s;  }
-    .wave-bar span:nth-child(8) { height: 22px; animation-delay: 0.7s;  }
-    .wave-bar span:nth-child(9) { height: 12px; animation-delay: 0.8s;  }
-
-    @keyframes wave-bounce {
-      0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
-      50%       { transform: scaleY(1);   opacity: 1;   }
-    }
-
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0);    }
+      letter-spacing: 0.02em;
+	  
     }
   </style>
 </head>
 <body>
   <div class="overlay"></div>
-
-  <!-- Ripple rings -->
-  <div class="ripple-container">
-    <div class="ripple"></div>
-    <div class="ripple"></div>
-    <div class="ripple"></div>
-    <div class="ripple"></div>
-  </div>
-
   <div class="hero">
-    <div class="event-label">&#127946; Official Swimming Event</div>
-
-    <div class="semicircle-wrapper">
-      <svg class="arc-svg" viewBox="0 230 600 85" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- 60° arc: chord x=40→560 (520px), r=520 → sagitta ≈70px -->
-          <path id="topArc" d="M 40,310 A 520,520 0 0,1 560,310"/>
-          <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%"   stop-color="#00c6ff"/>
-            <stop offset="50%"  stop-color="#ffffff"/>
-            <stop offset="100%" stop-color="#00c6ff"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Curved text along the shallow 45° arc -->
-        <text font-family="Montserrat, sans-serif" font-weight="900" font-size="30"
-              fill="#ffffff" letter-spacing="2">
-          <textPath href="#topArc" startOffset="50%" text-anchor="middle">
-            Shakeel Civil Contractor
-          </textPath>
-        </text>
-      </svg>
-
-      <div class="competition-subtitle">Inter Pool<br>Swimming Competition</div>
-    </div>
-
-    <div class="divider">
-      <div class="divider-line"></div>
-      <span class="divider-icon">&#128167;</span>
-      <div class="divider-line"></div>
-    </div>
-
-    <div class="date-badge">
-      <span class="icon">&#128197;</span>
-      18th April 2026
-      <br/>
-      Reporting Time: 3:00 PM
-    </div>
-
-    <div class="marathi-tagline">लेन पकड आणि Race Finish कर</div>
-    <div class="sub-brand">Virar Swimming &mdash; Phoolpada Pool</div>
-
-    <div class="wave-bar">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
+    <h1>लेन पकड आणि Race Finish कर</h1>
+	<h3>Virar Swimming</h3>
   </div>
 </body>
 </html>
